@@ -52,7 +52,7 @@
           class="column"
           class:today={date && date.toDateString() === today.toDateString()}
           >
-          {date ? date?.getDate() : ''}
+          {date?.getDate() ?? ''}
         </div>
       {/each}
     </div>
