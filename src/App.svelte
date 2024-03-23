@@ -2,6 +2,7 @@
   import svelteLogo from './assets/svelte.svg'
   import viteLogo from '/vite.svg'
   import Counter from './lib/Counter.svelte'
+  import Calendar from './lib/Calendar.svelte';
 </script>
 
 <main>
@@ -17,6 +18,10 @@
 
   <div class="card">
     <Counter />
+  </div>
+
+  <div class="card">
+    <Calendar />
   </div>
 
   <p>
