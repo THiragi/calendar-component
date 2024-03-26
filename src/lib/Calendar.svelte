@@ -1,11 +1,9 @@
 <svelte:options customElement="minimal-calendar" />
 
 <script lang="ts">
-  const weekdays = ['S','M','T','W','T','F','S'];
-  
   const today = new Date();
 
-  $: current = today;
+  let current = today;
   $: year = current.getFullYear();
   $: month = current.getMonth();
   $: start =  new Date(year, month, 1);
@@ -29,16 +27,16 @@
 <div class="calendar">
   <div class="calendar-header">
     <button class="arrow" on:click={prev}>
-      {`<`}
+      {`◀︎`}
     </button>
     <div class="current">{`${year}年 ${month + 1}月`}</div>
     <button class="arrow" on:click={next}>
-      {`>`}
+      {`▶︎`}
     </button>
   </div>
   <div class="calendar-body">
-    <div class="table">
-      {#each weekdays as weekday}        
+    <div class="table weekdays">
+      {#each ['日','月','火','水','木','金','土'] as weekday}        
         <div 
           class="column"
         >
@@ -46,7 +44,7 @@
         </div>
       {/each}
     </div>
-    <div class="table date">
+    <div class="table dates">
       {#each dates as date}
         <div 
           class="column"
@@ -60,25 +58,38 @@
 </div>
 
 <style>
+  button {
+    color: inherit;
+    font-family: inherit;
+    background-color: inherit;
+    border-width: 0;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
   .calendar {
-    width: 100%;
+    color: rgb(66,66,66);
+    max-width: 400px;
   }
   .calendar-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    font-weight: bold;
   }
   .table {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+  }
+  .table.weekdays {
+    font-size: 0.75rem;
   }
   .arrow,
   .column {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  .column {
     height: auto;
     aspect-ratio: 1 / 1;
     border-radius: 100%;
@@ -86,11 +97,14 @@
   .arrow {
     width: calc(100% / 7);
   }
-  
-  .table.date {
-    font-weight: bold;
-  }
   .today {
-    background-color: #1a1a1a;
+    color: #fff;
+    background-color: rgb(66,66,66);
+  }
+  .column:nth-of-type(7n) {
+    color: rgb(126, 139, 168);
+  }
+  .column:nth-of-type(7n+1) {
+    color: rgb(168, 126, 139);
   }
 </style>
