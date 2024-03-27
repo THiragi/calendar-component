@@ -27,16 +27,18 @@
 <div class="calendar">
   <div class="calendar-header">
     <button class="arrow" on:click={prev}>
-      {`◀︎`}
+      ◀︎
     </button>
-    <div class="current">{`${year}年 ${month + 1}月`}</div>
+    <button class="current" on:click={() => current = today}>
+      {`${year} - ${`00${month + 1}`.slice(-2)}`}
+    </button>
     <button class="arrow" on:click={next}>
-      {`▶︎`}
+      ▶︎
     </button>
   </div>
   <div class="calendar-body">
     <div class="table weekdays">
-      {#each ['日','月','火','水','木','金','土'] as weekday}        
+      {#each ['S','M','T','W','T','F','S'] as weekday}        
         <div 
           class="column"
         >
@@ -61,9 +63,11 @@
   button {
     color: inherit;
     font-family: inherit;
+    font-size: inherit;
     background-color: inherit;
     border-width: 0;
     outline: none;
+    cursor: pointer;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -71,19 +75,20 @@
   .calendar {
     color: rgb(66,66,66);
     max-width: 400px;
+    font-size: inherit;
   }
   .calendar-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-weight: bold;
   }
   .table {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
   }
   .table.weekdays {
-    font-size: 0.75rem;
+    font-size: 0.75em;
+    border-bottom: 1px solid rgb(198,198,198);
   }
   .arrow,
   .column {
@@ -92,7 +97,6 @@
     justify-content: center;
     height: auto;
     aspect-ratio: 1 / 1;
-    border-radius: 100%;
   }
   .arrow {
     width: calc(100% / 7);
@@ -100,11 +104,12 @@
   .today {
     color: #fff;
     background-color: rgb(66,66,66);
+    border-radius: 100%;
   }
   .column:nth-of-type(7n) {
-    color: rgb(126, 139, 168);
+    color: rgb(96, 139, 168);
   }
   .column:nth-of-type(7n+1) {
-    color: rgb(168, 126, 139);
+    color: rgb(168, 96, 139);
   }
 </style>
